@@ -1,0 +1,313 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 65534,
+      "max": [
+        1.431419014930725,
+        1.4503281116485596,
+        1.3855699300765991
+      ],
+      "min": [
+        -1.4649790525436401,
+        -1.4622730016708374,
+        -1.4142367839813232
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 786408,
+      "componentType": 5126,
+      "count": 65534,
+      "max": [
+        0.9998610615730286,
+        0.9997311234474182,
+        0.9999076724052429
+      ],
+      "min": [
+        -0.9999082684516907,
+        -0.9999336004257202,
+        -0.9999696016311646
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 65534,
+      "max": [
+        1.0,
+        0.2980392277240753,
+        0.007843137718737125,
+        1.0
+      ],
+      "min": [
+        0.007843137718737125,
+        0.007843137718737125,
+        0.0,
+        1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 107046,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1572816,
+      "componentType": 5126,
+      "count": 24993,
+      "max": [
+        1.008813738822937,
+        1.2123421430587769,
+        1.4712302684783936
+      ],
+      "min": [
+        -1.4470313787460327,
+        -1.2882606983184814,
+        -1.4521136283874512
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1872732,
+      "componentType": 5126,
+      "count": 24993,
+      "max": [
+        0.9999220371246338,
+        0.9997310638427734,
+        0.9999076724052429
+      ],
+      "min": [
+        -0.9999081492424011,
+        -0.9999334216117859,
+        -0.9999695420265198
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1048544,
+      "componentType": 5126,
+      "count": 24993,
+      "max": [
+        1.0,
+        0.2980392277240753,
+        0.007843137718737125,
+        1.0
+      ],
+      "min": [
+        0.007843137718737125,
+        0.007843137718737125,
+        0.0,
+        1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 428184,
+      "componentType": 5125,
+      "count": 39834,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "OPREXT (https://sketchfab.com/OPREXT)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/vfx-explosion-724a9505d9974fca9e9cdac6e52e6f2f",
+      "title": "Vfx Explosion"
+    },
+    "generator": "Sketchfab-16.29.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 587520,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 2172648,
+      "byteOffset": 587520,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1448432,
+      "byteOffset": 2760168,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 4208600,
+      "uri": "scene.bin"
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_specular"
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_specular": {
+          "specularColorFactor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "specularFactor": 1.0
+        }
+      },
+      "name": "material_0",
+      "pbrMetallicRoughness": {
+        "metallicFactor": 0.0
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_0",
+      "primitives": [
+        {
+          "attributes": {
+            "COLOR_0": 2,
+            "NORMAL": 1,
+            "POSITION": 0
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Object_1",
+      "primitives": [
+        {
+          "attributes": {
+            "COLOR_0": 6,
+            "NORMAL": 5,
+            "POSITION": 4
+          },
+          "indices": 7,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "root"
+    },
+    {
+      "children": [
+        3
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "GLTF_SceneRootNode"
+    },
+    {
+      "children": [
+        4,
+        5
+      ],
+      "matrix": [
+        -2.1904239654541016,
+        -0.3768601715564728,
+        1.4798099994659424,
+        0.0,
+        0.9824467897415161,
+        1.6331676244735718,
+        1.8701393604278564,
+        0.0,
+        -1.169044852256775,
+        2.078599452972412,
+        -1.2010749578475952,
+        0.0,
+        0.02197045274078846,
+        0.10402712970972061,
+        -0.04289045184850693,
+        1.0
+      ],
+      "name": "Sphere ext 2_0"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_4"
+    },
+    {
+      "mesh": 1,
+      "name": "Object_5"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Astroid Bennu
+* source:	https://sketchfab.com/3d-models/astroid-bennu-2926ad1b955a4d1982b88ebddba0a7be
+* author:	Mieke Roth (https://sketchfab.com/miekeroth)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Astroid Bennu" (https://sketchfab.com/3d-models/astroid-bennu-2926ad1b955a4d1982b88ebddba0a7be) by Mieke Roth (https://sketchfab.com/miekeroth) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
