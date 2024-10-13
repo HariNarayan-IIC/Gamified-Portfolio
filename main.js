@@ -316,11 +316,6 @@ animate();
 
 
 
-    
-
-
-animate2();
-
 // Handle window resize
 window.addEventListener('resize', () => {
 	const width = window.innerWidth;
