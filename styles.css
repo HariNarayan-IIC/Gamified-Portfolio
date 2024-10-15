@@ -19,7 +19,7 @@ canvas {
 }
 
 #story-text {
-    top: 0px;
+    bottom: 48px;
     z-index: 2;
     font-family: 'Courier New', Courier, monospace;
     color: white;
@@ -27,7 +27,20 @@ canvas {
     background-color: rgba(0, 0, 0, 0.5); /* Optional: Transparent background */
     padding: 10px;
     border-radius: 8px;
-    align-self: flex-start;
+    align-self: flex-end;
+}
+
+#points {
+    position: absolute;
+    z-index: 2;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+    align-self:flex-start;
+
 }
 
 .game-overlay {
@@ -39,7 +52,7 @@ canvas {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.2); /* Dark transparent background */
+    background-color: rgba(0, 0, 0, 0.5); /* Dark transparent background */
     z-index: 2; /* Ensure the overlay is above the canvas */
 }
 

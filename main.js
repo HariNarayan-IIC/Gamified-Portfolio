@@ -15,9 +15,11 @@ const stopButton = document.getElementById('stop-btn');
 const gameOverlay = document.getElementById('game-overlay');
 const gameCanvas = document.getElementById('game-canvas');
 const retryButton = document.getElementById('restart-btn');
+const pointsCard = document.getElementById('points');
 
 let gameStarted = false;
 let points = 0;
+
 
 startButton.addEventListener('click', () => {
 	// Hide the overlay and start button
@@ -378,10 +380,11 @@ function animate() {
 
 	// Check for spaceship-loop collisions (unlock content)
 	loops.forEach((loop, index) => {
-		if (spaceship && spaceship.position.distanceTo(loop.position) < 1.5) {
+		if (spaceship && spaceship.position.distanceTo(loop.position) < 1.5 && !explosion) {
 			console.log("Loop passed! Unlocking tab...");
 			loop.material.color.set(0x0000ff); // Change loop color when passed
-			incrementPoints()
+			pointsCard.innerHTML = points;
+			incrementPoints();
 		}
 	});
 
@@ -389,7 +392,6 @@ function animate() {
 	asteroids.forEach((asteroid, index) => {
 		if (spaceship && spaceship.position.distanceTo(asteroid.position) < 1.5) {
 			
-			// Change loop color when passed
 			
 				console.log("Collision with asteroid");
 				explosion = true
@@ -400,6 +402,7 @@ function animate() {
 				scene.add(explosionLight);
 				//executed = true
 				startButton.style.display = 'none';
+				stopButton.style.display = 'none';
 				gameOverlay.style.display = 'flex';
 				retryButton.style.display = 'flex';
 			
@@ -423,44 +426,63 @@ window.addEventListener('resize', () => {
 });
 
 function typeText(text, elementId, speed = 50) {
-    let i = 0;
-    const element = document.getElementById(elementId);
-    element.innerHTML = '';  // Clear existing text
+    return new Promise((resolve) => {
+        let i = 0;
+        const element = document.getElementById(elementId);
+        element.innerHTML = '';  // Clear existing text
 
-    function typeChar() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typeChar, speed);  // Delay between each character
+        function typeChar() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeChar, speed);  // Delay between each character
+            } else {
+                resolve();  // Resolve the promise when text is fully typed
+            }
         }
-    }
-    
-    typeChar();
+        
+        typeChar();
+    });
 }
 
-
 const storyTexts = [
-    "The adventure begins!",
-    "You crossed the first obstacle!",
-    "You're halfway through!",
-    "Almost there, keep going!",
-    "You've won the game!"
+    "Hello there voyager!",
+    "It seems you have travelled quite far in search of someone worth hiring",
+    "Worry not, cause you are close to your destination",
+    "Keep going, through the loops to learn more about me",
+    "My name is R Hari Narayan",
+    "I am currently pursuing Masters degree in Informatics from DU",
+    "Great you just unlocked my educational details tab",
+    "Keep going to unlock projects",
+    "Good job voyager!! you just unlocked my projects",
+    "Next stop is will unlock ways to get in contact",
+    "Almost there!!",
+    "Congratulation you just attained the puspose",
+    "for which you set out in this adventure",
+    "Now its all on you",
+    ""
 ];
 
 // This function will be called whenever points are updated
-let storyIndex = 0
-function updateStory(points) {
+let storyIndex = 0;
+let isTyping = false;
+
+async function updateStory(points) {
     storyIndex = Math.min(points, storyTexts.length - 1);
-    typeText(storyTexts[storyIndex], 'story-text');
+    if (!isTyping) {
+        isTyping = true;
+        await typeText(storyTexts[storyIndex], 'story-text');
+        isTyping = false;  // Set to false after typing is done
+    }
 }
 
 // Simulating point updates (In actual game, update this based on player progress)
-let oldPoints = points
 function incrementPoints() {
-    points+=0.05;
-	if (points - oldPoints > 1){
-		oldPoints = points
-    	updateStory(Math.floor(points));
-
-	}
+    points += 1;
+    if (points % 20 == 0) {
+        updateStory(points / 20);
+    }
 }
+
+// Initialize the story
+updateStory(0);
