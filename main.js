@@ -10,7 +10,101 @@ import { GammaCorrectionShader } from 'three/examples/jsm/shaders/GammaCorrectio
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 
 
+const startButton = document.getElementById('start-btn');
+const stopButton = document.getElementById('stop-btn');
+const gameOverlay = document.getElementById('game-overlay');
+const gameCanvas = document.getElementById('game-canvas');
+const retryButton = document.getElementById('restart-btn');
 
+let gameStarted = false;
+let points = 0;
+
+startButton.addEventListener('click', () => {
+	// Hide the overlay and start button
+	gameOverlay.style.display = 'none';
+
+	gameCanvas.style.display = 'block'
+
+	// Show the stop button
+	stopButton.style.display = 'block';
+
+	// Start the game logic here (e.g., 3D rendering, animations)
+	gameStarted = true
+	console.log('Game Started');
+	animate()
+});
+
+stopButton.addEventListener('click', () => {
+	// Show the overlay again
+	gameOverlay.style.display = 'flex';
+	retryButton.style.display = 'none';
+	startButton.style.display = 'flex';
+
+	// Hide the stop button
+	stopButton.style.display = 'none';
+
+	// Stop the game logic here
+	gameStarted = false
+	console.log('Game Stopped');
+});
+
+let animationId = null; // To track the current animation frame ID
+
+// Retry button event listener
+retryButton.addEventListener('click', () => {
+    // Cancel the previous animation loop
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+    }
+
+    // Reset the spaceship and asteroids positions
+    if (spaceship) {
+        spaceship.position.set(0,-2,0);
+        spaceship.rotation.y = Math.PI;
+		spaceship.rotation.z = 0;
+    }
+
+    if (explosion) {
+        explosion = false;
+        scene.remove(explosionModel);
+        scene.remove(explosionLight);
+    }
+
+    asteroids.forEach(asteroid => {
+        if (asteroid.position.z > -10) {
+            asteroid.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, -10 - Math.random() * 10);
+        }
+    });
+
+	loops.forEach(loop => {
+		if (loop.position.z > -5) {
+            loop.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, -10 - Math.random() * 10);
+        }
+	});
+
+    // Reset camera and other game settings
+    camera.position.set(0, 0, 5);
+    const target = new THREE.Vector3(0, 0, 0);
+    camera.lookAt(target);
+
+    explosionDuration = 120;
+    spaceSpeed = 0.15; // Reset space speed
+	explosionSize = 0.1;
+	explosionLight.intensity = 0;
+	storyIndex = 0;
+	points = 0;
+
+	updateStory(points);
+	
+
+    gameOverlay.style.display = 'none';
+    gameCanvas.style.display = 'block';
+    stopButton.style.display = 'block';
+
+    // Start the animation loop again, but cancel any previous ones
+    animationId = requestAnimationFrame(animate);
+});
 
 // Scene setup
 const scene = new THREE.Scene();
@@ -109,7 +203,7 @@ let explosion = false
 let explosionModel;
 loader.load('models/explosion/scene.gltf', (gltf) => {
 	explosionModel = gltf.scene;
-	explosionModel.scale.set(1.5, 1.5, 1.5); // Adjust the size of the spaceship model
+	explosionModel.scale.set(1.5, 1.5, 1.5); // Adjust the size of the explosion model
 	 // Set initial position of the spaceship
 
 }, undefined, (error) => {
@@ -121,7 +215,7 @@ const explosionLight = new THREE.AmbientLight(0xFFFF00, 0)
 camera.position.z = 5;
 
 //Space movement
-let spaceSpeed = 0.1;
+let spaceSpeed = 0.15;
 
 // Spaceship movement
 let spaceshipSpeed = 0.05;
@@ -168,7 +262,7 @@ let wobbleDirection = true
 let explosionDuration = 120
 let explosionSize = 0.1
 
-let executed = false
+
 
 let cameraAngle = 0; // Initial angle for revolving camera
 let cameraRadius = 5; // Radius for how far the camera will revolve
@@ -176,9 +270,9 @@ const cameraSpeed = 0.02; // Speed of camera revolution
 
 // Game loop
 function animate() {
-	
-        requestAnimationFrame(animate);
-
+	if (gameStarted){
+        animationId = requestAnimationFrame(animate);
+	}
 
 	// Move spaceship if it's loaded
 	if (spaceship) {
@@ -229,15 +323,13 @@ function animate() {
 
 	// Movement after explosion
 	if (explosion && explosionModel){
-		explosionModel.position.z += spaceSpeed;
-		spaceship.position.z += spaceSpeed;
-		explosionLight.position.z += spaceSpeed;
+		
 		explosionDuration -= 1;
-		explosionLight.intensity += 0.3;
-		explosionSize += 0.05;
-		explosionModel.scale.set(explosionSize, explosionSize, explosionSize)
-		if (explosionDuration < 0){
-			return;
+		
+		if (explosionDuration > 0){
+			explosionLight.intensity += 0.3;
+			explosionSize += 0.05;
+			explosionModel.scale.set(explosionSize, explosionSize, explosionSize)
 		}
 		
 	 }
@@ -289,6 +381,7 @@ function animate() {
 		if (spaceship && spaceship.position.distanceTo(loop.position) < 1.5) {
 			console.log("Loop passed! Unlocking tab...");
 			loop.material.color.set(0x0000ff); // Change loop color when passed
+			incrementPoints()
 		}
 	});
 
@@ -297,15 +390,19 @@ function animate() {
 		if (spaceship && spaceship.position.distanceTo(asteroid.position) < 1.5) {
 			
 			// Change loop color when passed
-			if (!executed) {
+			
 				console.log("Collision with asteroid");
 				explosion = true
+				spaceSpeed = 0;
 				explosionModel.position.set(spaceship.position.x, spaceship.position.y, spaceship.position.z);
 				explosionLight.position.set(spaceship.position.x, spaceship.position.y, spaceship.position.z);
 				scene.add(explosionModel);
 				scene.add(explosionLight);
-				executed = true
-			}
+				//executed = true
+				startButton.style.display = 'none';
+				gameOverlay.style.display = 'flex';
+				retryButton.style.display = 'flex';
+			
 		}
 	});
 
@@ -324,3 +421,46 @@ window.addEventListener('resize', () => {
 	camera.aspect = width / height;
 	camera.updateProjectionMatrix();
 });
+
+function typeText(text, elementId, speed = 50) {
+    let i = 0;
+    const element = document.getElementById(elementId);
+    element.innerHTML = '';  // Clear existing text
+
+    function typeChar() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeChar, speed);  // Delay between each character
+        }
+    }
+    
+    typeChar();
+}
+
+
+const storyTexts = [
+    "The adventure begins!",
+    "You crossed the first obstacle!",
+    "You're halfway through!",
+    "Almost there, keep going!",
+    "You've won the game!"
+];
+
+// This function will be called whenever points are updated
+let storyIndex = 0
+function updateStory(points) {
+    storyIndex = Math.min(points, storyTexts.length - 1);
+    typeText(storyTexts[storyIndex], 'story-text');
+}
+
+// Simulating point updates (In actual game, update this based on player progress)
+let oldPoints = points
+function incrementPoints() {
+    points+=0.05;
+	if (points - oldPoints > 1){
+		oldPoints = points
+    	updateStory(Math.floor(points));
+
+	}
+}
