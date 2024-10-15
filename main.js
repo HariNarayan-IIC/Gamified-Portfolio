@@ -91,7 +91,7 @@ retryButton.addEventListener('click', () => {
     camera.lookAt(target);
 
     explosionDuration = 120;
-    spaceSpeed = 0.15; // Reset space speed
+    spaceSpeed = 0.1; // Reset space speed
 	explosionSize = 0.1;
 	explosionLight.intensity = 0;
 	storyIndex = 0;
@@ -217,7 +217,7 @@ const explosionLight = new THREE.AmbientLight(0xFFFF00, 0)
 camera.position.z = 5;
 
 //Space movement
-let spaceSpeed = 0.15;
+let spaceSpeed = 0.1;
 
 // Spaceship movement
 let spaceshipSpeed = 0.05;
