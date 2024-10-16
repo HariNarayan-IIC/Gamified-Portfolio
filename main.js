@@ -476,13 +476,64 @@ async function updateStory(points) {
     }
 }
 
+const unlockThresholds = [80, 120, 140, 160, 180]; // Points required to unlock each icon
+
+function unlockIcon(index) {
+    const icon = document.getElementById(`icon-${index}`);
+    if (icon) {
+        icon.classList.remove('locked');
+        icon.classList.add('unlocked');
+    }
+
+}
+
 // Simulating point updates (In actual game, update this based on player progress)
 function incrementPoints() {
     points += 1;
     if (points % 20 == 0) {
         updateStory(points / 20);
     }
+
+	// Check if any icons should be unlocked
+    unlockThresholds.forEach((threshold, index) => {
+        if (points >= threshold) {
+            unlockIcon(index + 1); // Unlock the icon at this index
+        }
+    });
 }
+
+// Get the modal and close button elements
+const modal = document.getElementById('info-modal');
+const overlay = document.getElementById('modal-overlay');
+const closeBtn = document.getElementById('close-btn');
+
+// Add event listeners to unlocked icons
+document.querySelectorAll(".icon-container, .unlocked").forEach(icon => {
+    icon.addEventListener('click', () => {
+        const title = icon.getAttribute('data-title');
+        const content = icon.getAttribute('data-content');
+        
+        // Set the modal content
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-body').innerText = content;
+
+        // Show the modal and overlay
+        modal.style.display = 'block';
+        overlay.style.display = 'block';
+    });
+});
+
+// Close modal on close button click
+closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    overlay.style.display = 'none';
+});
+
+// Close modal on clicking outside the modal content
+overlay.addEventListener('click', () => {
+    modal.style.display = 'none';
+    overlay.style.display = 'none';
+});
 
 // Initialize the story
 updateStory(0);

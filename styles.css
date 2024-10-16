@@ -96,3 +96,150 @@ canvas {
     50% { transform: scale(1.1); }
     100% { transform: scale(1); }
 }
+
+body {
+    background-color: #000; /* Space-like dark background */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.vertical-bar {
+    position: absolute;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    border: 2px solid #00ffcc; /* Neon border */
+    border-radius: 15px;
+    z-index: 2;
+}
+
+.icon-container {
+    position: relative;
+    margin: 20px 0;
+    text-align: center;
+    pointer-events: none; /* Disable interaction when locked by default */
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(0 0 10px #00ffcc); /* Neon glow effect */
+    transition: transform 0.3s ease;
+}
+
+.icon-container.unlocked {
+    pointer-events: auto; /* Enable interaction when unlocked */
+}
+
+.icon-container.unlocked:hover .icon {
+    transform: scale(1.2); /* Slight enlarge on hover when unlocked */
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 160px;
+    background-color: #00ffcc;
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    left: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+    font-family: 'Arial', sans-serif;
+}
+
+.icon-container.unlocked:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.icon-lock-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay when locked */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.lock-icon {
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(0 0 10px #ff0000); /* Neon red glow for lock */
+}
+
+.icon-container.unlocked .icon-lock-overlay {
+    display: none; /* Hide lock overlay when unlocked */
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    display: none;
+    z-index: 999;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(0, 0, 0, 0.9);
+    border: 2px solid #00ffcc;
+    box-shadow: 0 0 10px #00ffcc;
+    width: 80%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 15px;
+    display: none;
+    z-index: 1000;
+}
+
+  
+.modal-content {
+    color: #00ffcc; /* Neon text color */
+    /* text-align: center; */
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 4px;
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    font-size: 18px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #ff0000;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #ff5555; /* Lighter red when hovered */
+}

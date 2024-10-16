@@ -24,6 +24,78 @@
 
     <h4 id="points"></h4>
 
+    <div class="modal-overlay" id="modal-overlay"></div>
+
+    <!-- Modal Structure -->
+    <div class="modal" id="info-modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn">&times;</span>
+            <h2 id="modal-title">Title</h2>
+            <p id="modal-body">This is the content of the modal.</p>
+        </div>
+    </div>
+
+    <div class="vertical-bar">
+        
+        <div class="icon-container locked" data-title="Personal Info" 
+        data-content=
+        "Name : R Hari Narayan
+        Age: 22
+        Gender : Male
+        Country : India" 
+        id = "icon-1">
+            <img src="/public/icons/astronaut-helmet.png" alt="Personal Info" class="icon">
+            <div class="tooltip">Personal Info</div>
+            <div class="icon-lock-overlay">
+                <img src="/public/icons/lock.png" alt="Locked" class="lock-icon">
+            </div>
+        </div>
+
+        <div class="icon-container locked" data-title="Education" 
+        data-content=
+        "12th : CBSE - Science, DTEA Sr Sec School
+        Graduation: BSc Electronics, DDUC, DU
+        Post Graduation: MSc Informatics, IIC, DU
+        " 
+        id = "icon-2">
+            <img src="/public/icons/ufo.png" alt="Education" class="icon">
+            <div class="tooltip">Education</div>
+            <div class="icon-lock-overlay">
+                <img src="/public/icons/lock.png" alt="Locked" class="lock-icon">
+            </div>
+        </div>
+
+        <div class="icon-container locked" data-title="Projects" 
+        data-content=
+        "ImageProcessingApp - Django based web application for image processing
+        FarmApp - An Android application for a particular FarmApp
+        " 
+        id = "icon-3">
+            <img src="/public/icons/rocket.png" alt="Projects" class="icon">
+            <div class="tooltip">Projects</div>
+            <div class="icon-lock-overlay">
+                <img src="/public/icons/lock.png" alt="Locked" class="lock-icon">
+            </div>
+        </div>
+
+        <div class="icon-container locked" data-title="Experience" 
+        data-content="Internship : CPS lab" 
+        id = "icon-4">
+            <img src="/public/icons/star.png" alt="Experience" class="icon">
+            <div class="tooltip">Experience</div>
+            <div class="icon-lock-overlay">
+                <img src="/public/icons/lock.png" alt="Locked" class="lock-icon">
+            </div>
+        </div>
+        <a href="https://www.linkedin.com/in/r-hari-narayan/" target="_blank" class="icon-container locked" id="icon-5">
+            <div class="icon-lock-overlay">
+                <img src="/public/icons/lock.png" alt="Locked" class="lock-icon">
+            </div>
+            <img src="/public/icons/linkedin.png" alt="Connect" class="icon">
+            <span class="tooltip">Experience</span>
+        </a>
+    </div>
+
     <script type="module" src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
